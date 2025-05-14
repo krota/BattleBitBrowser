@@ -1,0 +1,321 @@
+/* ---------- Base Layout ---------- */
+
+body {
+    font-family: sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  main {
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: #f0f0f0;
+  }
+  
+  /* ---------- Controls & Buttons ---------- */
+  
+  .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  
+  .controls {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  #stats {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+  }
+  
+  .controls button {
+    width: 200px;
+    max-width: 100%;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #444;
+  }
+
+  /* ---------- Legend Group ----------- */
+
+  .top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+  }
+
+  .legend {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .dot-green {
+    background: #2e7d32;
+  }
+  
+  .dot-gray {
+    background: #888;
+  }
+  
+  .dot-yellow {
+    background: #c49a00;
+  }
+  
+  .dot-red {
+    background: #b00020;
+  }
+  
+  #status {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+  }
+
+  /* ---------- Loading Overlay ----------- */
+
+  .server-pane {
+    position: relative;
+    min-height: 200px;
+    width: 100%;
+  }
+  
+  #loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(18, 18, 18, 0.85); /* translucent black */
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  #loading-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .spinner-crosshair {
+    width: 40px;
+    height: 40px;
+    display: block;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Spin animation */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* ---------- Server List Layout ---------- */
+  
+  #servers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 600px;
+  }
+  
+  /* ---------- Region Group ---------- */
+  
+  .region-group {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #0c0b0b;
+    border: 1px solid #333;
+  }
+  
+  .region-group h2 {
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.25rem;
+    margin: 0 0 1rem 0;
+    cursor: pointer;
+  }
+  
+  .toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    margin-right: 0.5rem;
+  }
+  
+  .toggle-icon.collapsed {
+    transform: rotate(-90deg);
+  }
+  
+  .region-servers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .region-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.25rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .region-name {
+    font-weight: bold;
+    flex-grow: 1;
+  }
+  
+  .player-count {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-left: 1rem;
+  }
+  
+  /* ---------- Individual Server Card ---------- */
+
+  .server-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .server-header strong {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #e0e0e0;
+  }
+  
+  .server-meta div strong {
+    display: inline-block;
+    width: 130px;
+    color: #ccc;
+    font-weight: 600;
+  }
+  
+  .server-meta div {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+    color: #f0f0f0;
+  }
+  
+  .server {
+    position: relative;
+    background: #1e1e1e;
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .server h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    color: #f5f5f5;
+    line-height: 1.2;
+  }
+
+  .server.active {
+    border-left: 4px solid #2e7d32;
+  }
+
+  .server.full {
+    border-left: 4px solid #b00020;
+  }
+
+  .server.locked {
+    border-left: 4px solid #c49a00;
+  }
+
+  .server.lowpop {
+    opacity: 0.6;
+    filter: grayscale(0.4);
+  }
+
+  .server.lowpop:hover {
+    opacity: 1;
+    filter: none;
+    transition: all 0.2s ease;
+  }
+
+  .server.lowpop h3, .server.lowpop .server-meta {
+    color: #bbb;
+  }
+  
+  /* ---------- Utility ---------- */
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* ---------- Responsive ---------- */
+  
+    @media (max-width: 600px) {
+        .server {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+    }
+  
+    .controls button {
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .server h3 {
+        font-size: 1rem;
+    }
+}
