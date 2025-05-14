@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
 let showEmptyServers = false;
 
 async function getServers() {
-    const endpoint = "https://publicapi.battlebit.cloud/Servers/GetServerList";
+    const endpoint = "http://localhost:5252/api/servers";
     const serverListDiv = document.getElementById('servers');
     const statusDiv = document.getElementById('status');
 
