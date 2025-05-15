@@ -1,3 +1,4 @@
+using System.Text.Json;
 using BattleBitBrowser.Settings;
 using BattleBitBrowser.Services;
 

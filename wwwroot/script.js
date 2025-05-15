@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
 let showEmptyServers = false;
 
 async function getServers() {
-    const endpoint = "http://localhost:5252/api/BattleBit/servers";
+    const endpoint = "/api/BattleBit/servers";
     const serverListDiv = document.getElementById('servers');
     const statusDiv = document.getElementById('status');
 
