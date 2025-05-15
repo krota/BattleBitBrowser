@@ -1,44 +1,25 @@
 using BattleBitBrowser.Settings;
-using Microsoft.Extensions.Options;
+using BattleBitBrowser.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<BattleBitSettings>(builder.Configuration.GetSection("BattleBitSettings"));
-
-builder.Services.AddHttpClient();
+builder.Services.Configure<BattleBitSettings>(builder.Configuration.GetSection("BattleBit"));
+builder.Services.AddHttpClient<IBattleBitService, BattleBitService>();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-Console.WriteLine("API URL: " + builder.Configuration["BattleBit:ApiUrl"]);
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseRouting();
+app.MapControllers();
 
-app.MapGet("/api/servers", async (
-        IHttpClientFactory httpClientFactory,
-        IOptions<BattleBitSettings> settings)
-    =>
-    {
-        var apiUrl = settings.Value.ApiUrl;
-
-        Console.WriteLine(apiUrl);
-
-        if (string.IsNullOrEmpty(apiUrl))
-        {
-            return Results.Problem("BattleBit API URL is not configured.");
-        }
-
-        var client = httpClientFactory.CreateClient();
-        var response = await client.GetAsync(apiUrl);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            return Results.Problem("Failed to fetch BattleBit Server List");
-        }
-        
-        var content = await response.Content.ReadAsStringAsync();
-        return Results.Content(content, "application/json");
-
-    });
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();

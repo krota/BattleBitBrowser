@@ -18,18 +18,9 @@ window.addEventListener("load", () => {
 let showEmptyServers = false;
 
 async function getServers() {
-    const endpoint = "http://localhost:5252/api/servers";
+    const endpoint = "http://localhost:5252/api/BattleBit/servers";
     const serverListDiv = document.getElementById('servers');
     const statusDiv = document.getElementById('status');
-
-    const gameModeNames = {
-        CONQ: "Conquest",
-        INFCONQ: "Infantry Conquest",
-        RUSH: "Rush",
-        DOMI: "Domination",
-        FRONTLINE: "Frontline",
-        VoxelFortify: "Voxel Fortify", // random community server mode
-      };
 
     try {
         statusDiv.textContent = 'Loading...'
@@ -52,12 +43,12 @@ async function getServers() {
         // Debug Server Response
         // console.log(servers);
 
-        const filtered = showEmptyServers ? servers : servers.filter(s => s.Players > 0);
-        const sorted = filtered.sort((a,b) => b.Players - a.Players);
+        const filtered = showEmptyServers ? servers : servers.filter(s => s.players > 0);
+        const sorted = filtered.sort((a,b) => b.players - a.players);
         const grouped = new Map();
 
         sorted.forEach(server => {
-            const region = server.Region;
+            const region = server.region;
 
             if(!grouped.has(region)) {
                 grouped.set(region, []);
@@ -71,7 +62,7 @@ async function getServers() {
             const regionDiv = document.createElement('div');
             const regionName = region.split('_')[0];
             const formattedRegion = regionName.charAt(0).toUpperCase() + regionName.slice(1);
-            const totalPlayers = servers.reduce((sum,server) => sum + server.Players, 0);
+            const totalPlayers = servers.reduce((sum,server) => sum + server.players, 0);
             regionDiv.className = 'region-group';
             regionDiv.innerHTML = `
                 <h2 class="region-header">
@@ -92,12 +83,11 @@ async function getServers() {
             });
 
             servers.forEach(server => {
-                const readableGameMode = gameModeNames[server.Gamemode] || server.Gamemode;
-                const isFull = (server.Players + server.QueuePlayers) >= server.MaxPlayers;
-                const isActive = (server.Players + server.QueuePlayers) / server.MaxPlayers > 0.7;
-                const isLocked = server.HasPassword;
+                const isFull = (server.players + server.queuePlayers) >= server.maxPlayers;
+                const isActive = (server.players + server.queuePlayers) / server.maxPlayers > 0.7;
+                const isLocked = server.hasPassword;
                 const lockIcon = isLocked ? '🔒 ' : '';
-                const serverName = `${lockIcon} ${server.Name}`;
+                const serverName = `${lockIcon} ${server.name}`;
                 
                 const serverDiv = document.createElement('div');
                 
@@ -122,13 +112,13 @@ async function getServers() {
                         ${statusBadge}
                     </div>
                     <div class="server-meta">
-                        <div><strong>Players:</strong> ${server.Players}/${server.MaxPlayers} (${server.QueuePlayers} in queue)</div>
-                        <div><strong>Game Mode:</strong> ${readableGameMode}</div>
-                        <div><strong>Map:</strong> ${server.Map}</div>
-                        <div><strong>Map Size:</strong> ${server.MapSize}</div>
-                        <div><strong>Password:</strong> ${server.HasPassword ? 'Yes' : 'No'}</div>
-                        <div><strong>Official:</strong> ${server.IsOfficial ? 'Yes' : 'No'}</div>
-                        <div><strong>Tickrate:</strong> ${server.Hz}Hz</div>
+                        <div><strong>Players:</strong> ${server.players}/${server.maxPlayers} (${server.queuePlayers} in queue)</div>
+                        <div><strong>Game Mode:</strong> ${server.gamemode}</div>
+                        <div><strong>Map:</strong> ${server.map}</div>
+                        <div><strong>Map Size:</strong> ${server.mapSize}</div>
+                        <div><strong>Password:</strong> ${server.hasPassword ? 'Yes' : 'No'}</div>
+                        <div><strong>Official:</strong> ${server.isOfficial ? 'Yes' : 'No'}</div>
+                        <div><strong>Tickrate:</strong> ${server.tickrate}</div>
                     </div>
                     `;
                 serversContainer.appendChild(serverDiv);
