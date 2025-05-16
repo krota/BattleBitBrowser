@@ -23,7 +23,7 @@ public class BattleBitService(HttpClient httpClient, IOptions<BattleBitSettings>
         
         return rawServers.Select(server =>
         {
-            server.Gamemode = MapGameMode(server.Gamemode);
+            server.Gamemode = MapGameMode(server.Gamemode ?? string.Empty);
             return server;
         }).ToList();
     }
