@@ -1,0 +1,3 @@
+[submodule "SteamApiService"]
+	path = SteamApiService
+	url = https://github.com/krota/SteamApiService.git

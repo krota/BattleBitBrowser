@@ -1,4 +1,3 @@
-using System.Text.Json;
 using BattleBitBrowser.Settings;
 using BattleBitBrowser.Services;
 
@@ -6,6 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<BattleBitSettings>(builder.Configuration.GetSection("BattleBit"));
 builder.Services.AddHttpClient<IBattleBitService, BattleBitService>();
+builder.Services.AddHttpClient("SteamApi", client =>
+{
+    client.BaseAddress = new Uri("http://steam-api:8081/");
+});
+builder.Services.AddScoped<ISteamApiService, SteamApiService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
