@@ -8,7 +8,7 @@ public class SteamApiService(IHttpClientFactory factory) : ISteamApiService
 
     public async Task<int> GetCurrentPlayerCountAsync(int appId)
     {
-        var res = await _httpClient.GetAsync($"/api/Steam/playercount/{appId}");
+        var res = await _httpClient.GetAsync($"/api/Steam/players/{appId}");
         res.EnsureSuccessStatusCode();
         return await res.Content.ReadFromJsonAsync<int>();
     }
