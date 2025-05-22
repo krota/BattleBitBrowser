@@ -6,11 +6,11 @@ public class SteamApiService(IHttpClientFactory factory) : ISteamApiService
 {
     private readonly HttpClient _httpClient = factory.CreateClient("SteamApi");
 
-    public async Task<int> GetCurrentPlayerCountAsync(int appId)
+    public async Task<PlayerCountViewModel?> GetCurrentPlayerCountAsync(int appId)
     {
         var res = await _httpClient.GetAsync($"/api/Steam/players/{appId}");
         res.EnsureSuccessStatusCode();
-        return await res.Content.ReadFromJsonAsync<int>();
+        return await res.Content.ReadFromJsonAsync<PlayerCountViewModel>();
     }
 
     public async Task<List<NewsItemViewModel>?> GetNewsAsync(int appId, int count = 3)
