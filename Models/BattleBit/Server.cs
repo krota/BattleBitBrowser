@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace BattleBitBrowser.Models;
+namespace BattleBitBrowser.Models.BattleBit;
 
-public class BattleBitServer
+public class Server
 {
     public required string Name { get; set; }
     public required string Map { get; set; }

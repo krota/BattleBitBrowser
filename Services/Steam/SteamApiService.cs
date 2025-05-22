@@ -1,6 +1,6 @@
-using BattleBitBrowser.Models;
+using BattleBitBrowser.Models.Steam;
 
-namespace BattleBitBrowser.Services;
+namespace BattleBitBrowser.Services.Steam;
 
 public class SteamApiService(IHttpClientFactory factory) : ISteamApiService
 {
@@ -13,10 +13,10 @@ public class SteamApiService(IHttpClientFactory factory) : ISteamApiService
         return await res.Content.ReadFromJsonAsync<int>();
     }
 
-    public async Task<List<SteamNewsItemViewModel>?> GetNewsAsync(int appId, int count = 3)
+    public async Task<List<NewsItemViewModel>?> GetNewsAsync(int appId, int count = 3)
     {
         var res = await _httpClient.GetAsync($"/api/Steam/news/{appId}?count={count}");
         res.EnsureSuccessStatusCode();
-        return await res.Content.ReadFromJsonAsync <List<SteamNewsItemViewModel>>();
+        return await res.Content.ReadFromJsonAsync <List<NewsItemViewModel>>();
     }
 }

@@ -1,29 +1,10 @@
-using BattleBitBrowser.Models;
 using BattleBitBrowser.Services;
+using BattleBitBrowser.Services.Steam;
 using BattleBitBrowser.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace BattleBitBrowser.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class BattleBitController(IBattleBitService service) : ControllerBase
-{
-    [HttpGet("servers")]
-    public async Task<IActionResult> GetServersAsync()
-    {
-        var servers = await service.GetServersAsync();
-        return Ok(servers);
-    }
-    
-    [HttpGet("leaderboard")]
-    public async Task<IActionResult> GetLeaderboardAsync()
-    {
-        var leaderboard = await service.GetLeaderboardAsync();
-        return Ok(leaderboard);
-    }
-}
+namespace BattleBitBrowser.Controllers.Steam;
 
 [ApiController]
 [Route("api/[controller]")]

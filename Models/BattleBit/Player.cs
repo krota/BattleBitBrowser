@@ -1,10 +1,9 @@
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using BattleBitBrowser.Utils.Json;
 
-namespace BattleBitBrowser.Models;
+namespace BattleBitBrowser.Models.BattleBit;
 
-public class BattleBitPlayer
+public class Player
 {
     public required string Name { get; set; }
     [JsonConverter(typeof(ParseStringToIntConverter))]

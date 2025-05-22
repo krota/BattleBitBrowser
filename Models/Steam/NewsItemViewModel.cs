@@ -1,6 +1,6 @@
-namespace BattleBitBrowser.Models;
+namespace BattleBitBrowser.Models.Steam;
 
-public class SteamNewsItemViewModel
+public class NewsItemViewModel
 {
     public string? Title { get; set; }
     public string? Url { get; set; }

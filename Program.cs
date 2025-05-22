@@ -1,5 +1,7 @@
 using BattleBitBrowser.Settings;
 using BattleBitBrowser.Services;
+using BattleBitBrowser.Services.BattleBit;
+using BattleBitBrowser.Services.Steam;
 
 var builder = WebApplication.CreateBuilder(args);
 
