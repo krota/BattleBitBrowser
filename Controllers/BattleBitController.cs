@@ -16,6 +16,13 @@ public class BattleBitController(IBattleBitService service) : ControllerBase
         var servers = await service.GetServersAsync();
         return Ok(servers);
     }
+    
+    [HttpGet("leaderboard")]
+    public async Task<IActionResult> GetLeaderboardAsync()
+    {
+        var leaderboard = await service.GetLeaderboardAsync();
+        return Ok(leaderboard);
+    }
 }
 
 [ApiController]
